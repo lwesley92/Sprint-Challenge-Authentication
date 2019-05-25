@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const jwtKey =
-  process.env.JWT_SECRET || 'secret is added';
-  'add a .env file to root of project with the JWT_SECRET variable';
+  process.env.JWT_SECRET || 'added a secret!';
 
 // quickly see what this file exports
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
 };
 
 function generateToken(user) {
-  const payload = { 
+  const payload = {
     subject: user.id,
     username: user.username,
   };
@@ -19,10 +18,12 @@ function generateToken(user) {
     expiresIn: '6h',
   };
   const secret = process.env.JWT_SECRET;
-  return jwt.sign(payload, secret, option) 
+  return jwt.sign(payload, secret, options)
 };
 
 
+
+// implementation details
 function authenticate(req, res, next) {
   const token = req.get('Authorization');
 
